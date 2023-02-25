@@ -52,10 +52,13 @@ io.on('connection', (socket) => {
       })
 
       setTimeout(() => {
+        console.log(`SESSION TIMEOUT :: room ${roomName} timed out`)
         // send sessionTimeout to the sockets
         ;[user1, user2].forEach((user) => {
           io.to(user.socket).emit('session timeout')
+          console.log('sent one request to stop')
         })
+        console.log()
 
         // remove the room
         delete roomMap[roomName]
